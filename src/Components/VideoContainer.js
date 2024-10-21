@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { YOUTUBE_VIDEO_API } from "./utils/constants";
 
 const VideoContainer = () => {
