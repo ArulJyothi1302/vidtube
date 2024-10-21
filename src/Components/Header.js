@@ -1,11 +1,6 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faHamburger,
-  faSearch,
-  faUser,
-} from "@fortawesome/free-solid-svg-icons";
+import { faBars, faSearch, faUser } from "@fortawesome/free-solid-svg-icons";
 import { APP_LOGO } from "./utils/constants";
 import { useDispatch } from "react-redux";
 import { toggleMenu } from "./utils/appSlice";
