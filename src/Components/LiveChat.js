@@ -9,6 +9,7 @@ const LiveChat = () => {
   const dispatch = useDispatch();
   const message = useSelector((store) => store.chat.message);
   const mode = useSelector((store) => store.darkMode.isDark);
+
   useEffect(() => {
     const time = setInterval(() => {
       dispatch(
@@ -20,6 +21,7 @@ const LiveChat = () => {
       return () => clearInterval(time);
     }, 2000);
   }, [dispatch]);
+
   return (
     <>
       <div
@@ -40,21 +42,23 @@ const LiveChat = () => {
           setLiveMessage("");
         }}
       >
-        <input
-          className="p-2 w-96 shadow-md text-black"
-          type="text"
-          placeholder="Message"
-          value={liveMessage}
-          onChange={(e) => setLiveMessage(e.target.value)}
-        />
-        <button
-          className={`p-2 mx-1 bg-black ${
-            !mode ? " bordeer border-black" : "border border-white"
-          } text-white rounded-l-full`}
-          type="submit"
-        >
-          Send
-        </button>
+        <div className="flex flex-col sm:flex-row items-center justify-between">
+          <input
+            className="p-2 w-full sm:w-[80%] md:w-[90%] shadow-md text-black mb-2 sm:mb-0"
+            type="text"
+            placeholder="Message"
+            value={liveMessage}
+            onChange={(e) => setLiveMessage(e.target.value)}
+          />
+          <button
+            className={`p-2 mx-1 bg-black ${
+              !mode ? "border border-black" : "border border-white"
+            } text-white rounded-l-full w-full sm:w-auto`}
+            type="submit"
+          >
+            Send
+          </button>
+        </div>
       </form>
     </>
   );

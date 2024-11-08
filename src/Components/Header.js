@@ -26,7 +26,7 @@ const Header = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const searchCache = useSelector((store) => store.search);
   const dispatch = useDispatch();
-  // Create refs for input and suggestion box
+
   const inputRef = useRef(null);
   const suggBoxRef = useRef(null);
 
@@ -68,7 +68,6 @@ const Header = () => {
   }, []);
 
   useEffect(() => {
-    // Function to handle clicks outside the input and suggestion box
     const handleClickOutside = (event) => {
       if (
         inputRef.current &&
@@ -80,18 +79,16 @@ const Header = () => {
       }
     };
 
-    // Add event listener to detect clicks outside
     document.addEventListener("click", handleClickOutside);
 
     return () => {
-      // Clean up event listener on component unmount
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
 
   const handleSuggestionClick = async (suggestion) => {
     setSearchQuery(suggestion);
-    hideSugg(false); // Hide suggestions on suggestion click
+    hideSugg(false);
 
     const data = await fetch(YOUTUBE_SEARCH_QUERY_API + suggestion);
     const json = await data.json();
@@ -107,33 +104,39 @@ const Header = () => {
     <div
       className={
         dark
-          ? "grid grid-flow-col p-2 shadow-lg justify-between bg-black text-white"
-          : "grid grid-flow-col p-2 shadow-lg justify-between bg-white text-black"
+          ? "grid grid-cols-3 md:grid-cols-4 p-2 shadow-lg justify-between bg-black text-white"
+          : "grid grid-cols-3 md:grid-cols-4 p-2 shadow-lg justify-between bg-white text-black"
       }
     >
-      <div className="flex m-3 col-span-1">
+      {/* Left - Logo and Menu Icon */}
+      <div className="flex items-center col-span-1">
         <FontAwesomeIcon
-          className="p-4 hover:bg-slate-300 hover:rounded-full cursor-pointer"
+          className="p-2 hover:bg-slate-300 hover:rounded-full cursor-pointer md:p-4"
           icon={faBars}
           onClick={menuHandler}
         />
         <a href="/">
-          <img className="h-7 my-3 px-4" alt="logo" src={APP_LOGO} />
+          <img
+            className="h-6 sm:h-8 w-24 sm:w-28 md:w-36 my-3 px-2 sm:px-4"
+            alt="logo"
+            src={APP_LOGO}
+          />
         </a>
       </div>
 
-      <div className="col-span-10 my-3 px-30">
-        <div>
+      {/* Center - Search Bar */}
+      <div className="col-span-2 md:col-span-2 flex items-center justify-center">
+        <div className="flex items-center w-full md:w-3/4">
           <input
             ref={inputRef}
-            className="text-black rounded-l-full py-2 px-10 w-1/2 border border-gray-400 outline-blue-800"
+            className="text-black rounded-l-full py-2 px-4 sm:px-6 w-full border border-gray-400 outline-blue-800"
             type="text"
             value={searchQuery}
             onChange={(e) => {
               setSearchQuery(e.target.value);
-              hideSugg(true); // Show suggestions while typing
+              hideSugg(true);
             }}
-            onFocus={() => hideSugg(true)} // Show suggestions on input focus
+            onFocus={() => hideSugg(true)}
             placeholder="Search"
           />
           <button className="rounded-r-full py-2 px-4 bg-gray-200 border border-gray-400 text-black">
@@ -142,16 +145,16 @@ const Header = () => {
         </div>
         {showSugg && sugg.length > 0 && (
           <div
-            ref={suggBoxRef} // Ref for suggestion box
-            className="w-[12rem] md:min-w-[20rem] lg:w-[32rem] mx-2 px-5 fixed rounded-xl border border-gray-300 shadow-lg my-1 bg-white"
+            ref={suggBoxRef}
+            className="absolute mt-12 w-4/5 sm:w-[16rem] md:w-[20rem] lg:w-[32rem] rounded-xl border border-gray-300 shadow-lg bg-white z-10"
           >
             {sugg.map((s, i) => (
               <ul key={i}>
                 <li
                   onClick={() => handleSuggestionClick(s)}
-                  className="px-2 my-2 text-black hover:bg-gray-300 cursor-pointer"
+                  className="px-4 py-2 text-black hover:bg-gray-300 cursor-pointer"
                 >
-                  <FontAwesomeIcon className="mr-4" icon={faSearch} />
+                  <FontAwesomeIcon className="mr-3" icon={faSearch} />
                   {s}
                 </li>
               </ul>
@@ -159,13 +162,15 @@ const Header = () => {
           </div>
         )}
       </div>
-      <div>
+
+      {/* Right - Mode Toggle and User Icon */}
+      <div className="flex items-center justify-end col-span-1 md:col-span-1 space-x-2">
         <button
           onClick={handleMode}
           className={
             dark
-              ? "rounded-full bg-white text-black px-2 py-1 m-3"
-              : "rounded-full bg-black text-white px-2 py-1 m-3"
+              ? "rounded-full bg-white text-black px-2 py-1 md:px-3 md:py-2"
+              : "rounded-full bg-black text-white px-2 py-1 md:px-3 md:py-2"
           }
         >
           {!dark ? (
@@ -174,13 +179,10 @@ const Header = () => {
             <FontAwesomeIcon icon={faSun} />
           )}
         </button>
-      </div>
-
-      <div className="col-span-1">
         <FontAwesomeIcon
           className={`${
             dark ? "bg-white text-black" : "bg-black text-white"
-          }  p-2 m-3 text-2xl h-5 rounded-full`}
+          } p-2 md:p-3 rounded-full cursor-pointer`}
           icon={faUser}
         />
       </div>

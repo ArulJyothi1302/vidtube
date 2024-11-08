@@ -144,12 +144,12 @@ const CommentContainer = () => {
   const CommentSection = ({ data }) => {
     const { name, text } = data;
     return (
-      <div className="bg-gray-200 w-1/2 p-4 rounded-xl shadow-lg flex my-3 text-black">
+      <div className="bg-gray-200 p-4 rounded-xl shadow-lg flex my-3 text-black w-full sm:w-3/4 md:w-1/2 lg:w-1/3">
         <div className="bg-black rounded-full p-4 h-12">
           <FontAwesomeIcon className="text-white mb-2" icon={faUser} />
         </div>
         <div className="px-4">
-          <h3 className="font-bold ">@{name}</h3>
+          <h3 className="font-bold">@{name}</h3>
           <p>{text}</p>
         </div>
       </div>
@@ -158,22 +158,23 @@ const CommentContainer = () => {
 
   const CommentList = ({ comments }) => {
     return comments.map((comment, i) => (
-      <div key={i}>
+      <div key={i} className="mb-3">
         <CommentSection data={comment} />
         <div
-          className={`pl-5 mx-4 border ${
+          className={`pl-5 mx-4 border-l-2 ${
             !mode
               ? "border-l-black"
-              : "border-l-white border-y-black border-x-black "
+              : "border-l-white border-y-black border-x-black"
           }`}
         >
-          <CommentList key={i} comments={comment.replies} />
+          <CommentList comments={comment.replies} />
         </div>
       </div>
     ));
   };
+
   return (
-    <div className="my-5 p-2">
+    <div className="my-5 p-4">
       <h3 className="font-bold text-2xl py-2">Comments</h3>
 
       <CommentList comments={commData} />

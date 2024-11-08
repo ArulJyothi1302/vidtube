@@ -13,7 +13,7 @@ const SideBar = () => {
       className={`${
         !root
           ? mode
-            ? "absolute left-0 h-full transition-transform duration-100 z-10 bg-black shadow-lg overflow-x-hidden w-48 px-2"
+            ? " absolute left-0 h-full transition-transform duration-100 z-10 bg-black shadow-lg overflow-x-hidden w-48 px-2"
             : "absolute left-0 h-full transition-transform duration-100 z-10 bg-white text-black shadow-lg overflow-x-hidden w-48 px-2"
           : mode
           ? "w-48 pr-20 bg-black"
