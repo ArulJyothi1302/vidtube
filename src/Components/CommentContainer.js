@@ -142,7 +142,7 @@ const CommentContainer = () => {
   ];
 
   const CommentSection = ({ data }) => {
-    const { name, text, replies } = data;
+    const { name, text } = data;
     return (
       <div className="bg-gray-200 w-1/2 p-4 rounded-xl shadow-lg flex my-3 text-black">
         <div className="bg-black rounded-full p-4 h-12">
