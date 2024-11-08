@@ -22,4 +22,13 @@ const VideoList = ({ info }) => {
   );
 };
 
+export const AdVideoCard = ({ info }) => {
+  return (
+    <div className="bg-gray-300 rounded-xl">
+      <VideoList info={info} />
+      <h3 className="p-1">Ad</h3>
+    </div>
+  );
+};
+
 export default VideoList;
