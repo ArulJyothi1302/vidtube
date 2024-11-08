@@ -49,7 +49,9 @@ const Header = () => {
   }, [searchQuery]);
 
   const getQuery = async () => {
-    const data = await fetch(YOUTUBE_SEARCH_API + searchQuery);
+    const data = await fetch(
+      `https://cors-anywhere.herokuapp.com/` + YOUTUBE_SEARCH_API + searchQuery
+    );
     const json = await data.json();
     setSugg(json[1]);
     dispatch(cacheSearch({ [searchQuery]: json[1] }));
