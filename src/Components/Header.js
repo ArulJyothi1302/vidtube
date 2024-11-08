@@ -88,19 +88,16 @@ const Header = () => {
   }, []);
 
   const handleSuggestionClick = async (suggestion) => {
-    console.log(suggestion);
     setSearchQuery(suggestion);
     hideSugg(false); // Hide suggestions on suggestion click
 
     const data = await fetch(YOUTUBE_SEARCH_QUERY_API + suggestion);
     const json = await data.json();
-    console.log(json);
     const fetchedId = json.items[0].id.videoId;
     navigate(`/watch?v=${fetchedId}`);
   };
 
   const handleMode = () => {
-    console.log("ModeChange");
     dispatch(toggleMode());
   };
 

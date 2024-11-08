@@ -11,7 +11,6 @@ const LiveChat = () => {
   const mode = useSelector((store) => store.darkMode.isDark);
   useEffect(() => {
     const time = setInterval(() => {
-      //   console.log("Welcome to chat");
       dispatch(
         addMessage({
           name: generateRandName(),
@@ -37,7 +36,6 @@ const LiveChat = () => {
         className={`border ${!mode ? "border-black" : "border-white"} p-2 m-2`}
         onSubmit={(e) => {
           e.preventDefault();
-          console.log(liveMessage);
           dispatch(addMessage({ name: "Arul", message: liveMessage }));
           setLiveMessage("");
         }}
