@@ -19,7 +19,7 @@ const WatchPage = () => {
 
   return (
     <div className="my-4 w-full">
-      <div className="flex px-5">
+      <div className="flex flex-wrap md:flex-nowrap px-5">
         <div>
           <iframe
             className="rounded-xl "
