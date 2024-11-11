@@ -58,16 +58,6 @@ const Header = () => {
   };
 
   useEffect(() => {
-    const handleScroll = () => {
-      hideSugg(false);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
-  useEffect(() => {
     const handleClickOutside = (event) => {
       if (
         inputRef.current &&
@@ -146,7 +136,7 @@ const Header = () => {
         {showSugg && sugg.length > 0 && (
           <div
             ref={suggBoxRef}
-            className="absolute mt-12 w-4/5 sm:w-[16rem] md:w-[20rem] lg:w-[32rem] rounded-xl border border-gray-300 shadow-lg bg-white z-10"
+            className="absolute top-2 mt-12 w-fit sm:w-[16rem] md:w-[20rem] lg:w-[32rem] mr-10  rounded-xl border border-gray-300 shadow-lg bg-white z-10"
           >
             {sugg.map((s, i) => (
               <ul key={i}>
